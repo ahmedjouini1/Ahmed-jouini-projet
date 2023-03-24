@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Ahmed Jouini</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+     function verifier() {
+			var nom = document.getElementById("nom").value;
+			var prenom = document.getElementById("prenom").value;
+			var age = document.getElementById("age").value;
+			var email = document.getElementById("email").value;
+    // Fonction pour vérifier si la saisie est une chaîne de caractères ou non
+      function VerifNom(nom) {
+        if (nom === '') {
+    return false;
+  } else {
+    return true;
+  }
+
+// Boucle sur chaque caractère de la chaîne d'entrée
+for (var i = 0; i < nom.length; i++) {
+  var charCode = nom.charCodeAt(i);
+
+  // Vérifie si le caractère est un caractère alphabétique ou un espace
+  if ((charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 122) && charCode !== 32) {
+    return false;
+  }
+
+}
+
+// Si l'entrée passe tous les tests, retourne true
+return true;
+}
+
+// Fonction pour vérifier si la saisie est une chaîne de caractères ou non
+function VerifPrenom(prenom) {
+  if (prenom === '') {
+    return false;
+  } else {
+    return true;
+  }
+
+// Boucle sur chaque caractère de la chaîne d'entrée
+for (var i = 0; i < prenom.length; i++) {
+  var charCode = prenom.charCodeAt(i);
+
+  // Vérifie si le caractère est un caractère alphabétique ou un espace
+  if ((charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 122) && charCode !== 32) {
+    return false;
+  }
+
+}
+
+// Si l'entrée passe tous les tests, retourne true
+return true;
+}
+
+
+// Fonction pour vérifier si la saisie est un email ou non
+			function VerifEmail(email) {
+  let a = email.indexOf("@");
+  let b = email.lastIndexOf(".");
+  let x = email.slice(0, a);
+  let y = email.slice(a + 1, b);
+  let z = email.slice(b + 1);
+  if (a === -1 || b === -1 || !VerifNom(x) || !VerifNom(y) || !VerifNom(z) || (z.length !== 2 && z.length !== 3) || b <= a) {
+    return false;
+  } else {
+    return true;
+  }
+}
+// Fonction pour vérifier si la saisie est un nombre ou non
+function VerifAge(age) {
+  if (age === '') {
+    return false;
+  } else {
+    return true;
+  }
+  let i = 0;
+  while (age[i] === '0') { // Ignorer les zéros non significatifs
+    i++;
+  }
+  if (i === age.length) { // Vérifie si l'âge est égal à zéro
+    return true;
+  }
+  for (; i < age.length; i++) {
+    if (age[i] < '0' || age[i] > '9') { // Vérifie si chaque caractère est un chiffre
+      return false;
+    }
+  }
+  if (age.length - i > 2 || (age.length - i === 2 && age.slice(i) > '100')) { // Vérifie si l'âge est dans la plage valide
+    return false;
+  }
+  return true;
+}
+
+			
+
+			
+//L'affichage des messages s'il s'agit d'une erreur ou si les données ne sont pas correctes.
+			if (!VerifNom(nom) ) {
+				document.getElementById("nom_erreur").innerHTML = "Le nom doit être une chaîne de caractères";
+				erreur = true;
+			} else {
+				document.getElementById("nom_erreur").innerHTML = "";
+			}
+
+			if (!VerifPrenom(prenom)) {
+				document.getElementById("prenom_erreur").innerHTML = "Le prénom doit être une chaîne de caractères";
+				erreur = true;
+			} else {
+				document.getElementById("prenom_erreur").innerHTML = "";
+			}
+
+			if (!VerifAge(age)) {
+				document.getElementById("age_erreur").innerHTML = "L'âge doit être composé de chiffres et doit être inférieur à 100";
+				erreur = true;
+			} else {
+				document.getElementById("age_erreur").innerHTML = "";
+			}
+
+			if (!VerifEmail(email)) {
+				document.getElementById("email_erreur").innerHTML = "L'adresse email doit être valide";
+				erreur = true;
+			} else {
+				document.getElementById("email_erreur").innerHTML = "";
+			}
+
+			
+		}
+    </script>
+  </head>
+  <body>
+  <div class="contact-form">
+    <h1>Entrez vos informations</h1>
+    <div class="txtb">
+      <label>NOM :</label>
+      <input type="text" id="nom" name="" value="" >
+    </div>
+    <span id="nom_erreur"></span><br>
+
+    <div class="txtb">
+      <label>PRENOM:</label>
+      <input type="text" id="prenom" name="" value="" >
+    </div>
+    <span id="prenom_erreur"></span><br>
+
+    <div class="txtb">
+      <label>AGE :</label>
+      <input type="email"  id="age" name="" value="" >
+    </div>
+    <span id="age_erreur"></span><br>
+    
+    <div class="txtb">
+      <label>EMAIL:</label>
+      <input type="text"  id="email" name="" value="" >
+    </div>
+    <span id="email_erreur"></span><br>
+
+    
+    <a class="btn" onclick="verifier()">Vérifier les données</a>
+  </div>
+  </body>
+</html>
